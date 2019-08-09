@@ -1,0 +1,29 @@
+/* .container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  
+  .col-xs-6 {
+    padding-right: 15px;
+    padding-left: 15px;
+  } */
+
+
+ .container1 {
+  float: right; 
+  width: 100px;
+  margin-right: 20px;
+  color: red;
+}
+
+ div.routediv {
+    flex: 1;
+    padding: '10px';
+}
