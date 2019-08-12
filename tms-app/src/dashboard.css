@@ -1,23 +1,7 @@
-/* .container{
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto
+ .dashboard {
+    background-color:rgb(240, 232, 232); 
+    padding: 20px;
+    width: 85vw;
+    position: static;
+    min-height: 100vh;
 }
-
-.row {
-    margin-right: -15px;
-    margin-left: -15px;
-  }
-  
-  .col-xs-6 {
-    padding-right: 15px;
-    padding-left: 15px;
-  }
- */
-/* 
- .container {
-  float: right; 
-  width: 600px;
-  margin-right: 20px;
-} */
