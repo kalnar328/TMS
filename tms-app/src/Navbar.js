@@ -18,7 +18,7 @@ export default class NavBar extends Component {
                 <ul className="header">
                     <li><NavLink to="/dashboard" activeClassName="active" component={Dashboard}>Dashboard</NavLink></li>
                     <li><NavLink to="/trainer"activeClassName="active" component={Trainer}>Trainer</NavLink></li>
-                    <li><NavLink to="/trainingType" activeClassName="active" component={TrainingType}>Training Type</NavLink></li>
+                    <li><NavLink to="/trainingType" activeClassName="active" component={TrainingType}>Type</NavLink></li>
                     <li><NavLink to="/event" activeClassName="active" component={Events}>Events</NavLink></li>
                 </ul>
                 
