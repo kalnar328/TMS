@@ -29,3 +29,12 @@
 .block{
   width: 2%;
 }
+
+.updateContainer{
+  background-color:  rgb(173, 151, 151);
+  /* padding:4% 3% ; */
+  /* height:50%; */
+  /* width: 35%; */
+  /* float: right; */
+  /* border-radius: 15px; */
+}
