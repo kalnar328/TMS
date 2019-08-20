@@ -1,0 +1,31 @@
+.container1 {
+  width: 85vw;
+  background-color: rgb(234, 234, 238);
+  padding:5% 3%;
+  height:95%;
+  float: right;
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+
+}
+.tablecontainer {
+  background-color: white;
+  padding:5% 4%;
+  height:90%;
+  width: 65%;
+  float: left;
+  border-radius: 15px;
+}
+.formcontainer {
+  background-color:  white;
+  padding:4% 3% ;
+  height:90%;
+  width: 35%;
+  float: right;
+  border-radius: 15px;
+
+}
+.block{
+  width: 2%;
+}

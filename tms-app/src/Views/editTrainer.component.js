@@ -1,22 +1,40 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import ReactDOM from 'react-dom';
-import TrainerList from './trainerList';
 
-import '../css/trainer.css'
+// //modal popuo dependency 
+// import Modal from '@trendmicro/react-modal';
+// // Be sure to include styles at some point, probably during your bootstraping
+// import '@trendmicro/react-modal/dist/react-modal.css'
 
-export default class Trainer extends Component{
 
-    constructor(props){
+export default class EditTrainer extends Component{
+    constructor(props) {
         super(props);
+
+        this.onChangeId = this.onChangeId.bind(this);
+        this.onChangeName = this.onChangeName.bind(this);
+        this.onChangeDesination = this.onChangeDesination.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+
         this.state = {
             trainerId: '',
             trainerName: '',
-            designation: '',
-            trainers: []
+            designation: ''
         };
-        this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:4000/edit/'+this.props.match.params.id)
+            .then(response => {
+                this.setState({
+                    trainerId: response.data.trainerId,
+                    trainerName: response.data.trainerName,
+                    designation: response.data.designation
+                })   
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
 
     onChangeId = (e) => {
@@ -35,16 +53,18 @@ export default class Trainer extends Component{
         });
     }
 
-    onSubmit(e){
+    onSubmit(e) {
         e.preventDefault();
 
-        const newTrainer = {
+        const updateTrainer = {
             trainerId: this.state.trainerId,
             trainerName: this.state.trainerName,
             designation: this.state.designation
         };
 
-        axios.post('http://localhost:4000/new', newTrainer)
+        console.log(updateTrainer);
+
+        axios.put('http://localhost:4000/edit/'+this.props.match.params.trainerId, updateTrainer)
             .then(res => console.log(res.data))
             .then(data => {
                 alert('Trainer added sccesfully');
@@ -52,30 +72,14 @@ export default class Trainer extends Component{
             })
             .catch(function(error){
                 console.log(error);
-            });
+            });;
     }
 
-    componentDidMount(){
-        axios.get('http://localhost:4000/trainers')
-            .then(response => {
-                this.setState({trainers: response.data});
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-    }
+    render() {
+        return (
+            <div>
 
-    trainers(){
-        return this.state.trainers.map(function(currentTrainer, i){
-            return <TrainerList trainer={currentTrainer} key={i} />;
-        })
-    }    
-
-    render(){
-        return(
-            <div className="container1">
-                
-                <div className="formcontainer">
+                <h3 align="center">Update Todo</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label for="trainerId">ID</label>
@@ -93,27 +97,9 @@ export default class Trainer extends Component{
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
-                </div>
-            
-                <div className="block"></div>
 
-                <div className="tablecontainer"> 
-                    <table className="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Username </th>
-                                    <th>Name</th>
-                                    <th>Designation</th>
-                                    <th>Action</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.trainers()}
-                            </tbody>
-                        </table>
-                </div>
-             </div>
+            </div>
         )
     }
 }
+

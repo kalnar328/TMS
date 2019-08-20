@@ -6,6 +6,7 @@ import Dashboard from "./Views/dashboard.component";
 import Trainer from "./Views/trainer.component";
 import TrainingType from "./Views/trainingType.component";
 import Events from "./Views/trainingEvent.component";
+import EditTrainer from './Views/editTrainer.component';
 
 //css files
 import './Navbar.css';
@@ -27,6 +28,7 @@ export default class NavBar extends Component {
                     <Route path="/trainer" component={Trainer} />
                     <Route path="/trainingType" component={TrainingType} />
                     <Route path="/event" component={Events} /> 
+                    <Route path="/trainer/edit" component={EditTrainer} /> 
                 </div>                             
               </div>
             </Router>

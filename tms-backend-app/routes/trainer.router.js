@@ -37,6 +37,12 @@ module.exports = {
       }
 
       let query = "INSERT INTO trainer(trainerId, trainerName, designation) VALUES ('"+ Trainer.id +"', '"+Trainer.name+"', '"+ Trainer.designation+"')" ;
+      let selectQuery = "SELECT * FROM trainer WHERE trainerId = '"+ Trainer.id +"' ";
+
+      db.query(selectQuery, (err, result) => {
+          if(result.length)
+        console.log(result);
+      });
 
       db.query(query, (err, result) => {
           if(err){
@@ -78,6 +84,7 @@ module.exports = {
           return res.status(500).send(err);
       }
       return res.status(200).send({message: "successfully removed"});
-  });
+    });
   }
+
 };
