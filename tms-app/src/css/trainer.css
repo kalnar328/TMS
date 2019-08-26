@@ -1,7 +1,7 @@
 .container1 {
   width: 85vw;
   background-color: rgb(234, 234, 238);
-  padding:5% 3%;
+  padding:2% 3%;
   height:95%;
   float: right;
   display: flex;
@@ -11,7 +11,7 @@
 }
 .tablecontainer {
   background-color: white;
-  padding:5% 4%;
+  padding:4% 4%;
   height:90%;
   width: 65%;
   float: left;
@@ -24,7 +24,6 @@
   width: 35%;
   float: right;
   border-radius: 15px;
-
 }
 .block{
   width: 2%;

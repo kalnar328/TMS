@@ -1,0 +1,17 @@
+.tablecontainerEvent{
+    background-color: white;
+    padding:4% 2%;
+    height:90%;
+    width: 90%;
+    float: left;
+    border-radius: 15px;
+  }
+
+  .formcontainerEvent {
+    background-color:  white;
+    padding:3% 3% ;
+    height:90%;
+    width: 30%;
+    float: right;
+    border-radius: 15px;
+  }

@@ -1,53 +1,52 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import ReactDOM from 'react-dom';
-import TrainerList from './trainerList';
+import NavBar from '../../Navbar';
+import TypesList from './trainingTypeList';
 
-import '../css/trainer.css'
-
-export default class Trainer extends Component{
+export default class TrainingType extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-            trainerId: '',
-            trainerName: '',
-            designation: '',
-            trainers: []
+            trainingId: '',
+            trainingType: '',
+            description: '',
+            types: []
         };
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onChangeId = (e) => {
         this.setState({
-            trainerId: e.target.value
+            trainingId: e.target.value
         });
     }
     onChangeName = (e) => {
         this.setState({
-            trainerName: e.target.value
+            trainingType: e.target.value
         });
     }
-    onChangeDesination = (e) => {
+    onChangeDescription = (e) => {
         this.setState({
-            designation: e.target.value
+            description: e.target.value
         });
     }
 
     onSubmit(e){
         e.preventDefault();
 
-        const newTrainer = {
-            trainerId: this.state.trainerId,
-            trainerName: this.state.trainerName,
-            designation: this.state.designation
+        const newType = {
+            trainingId: this.state.trainingId,
+            trainingType: this.state.trainingType,
+            description: this.state.description
         };
 
-        axios.post('http://localhost:4000/new', newTrainer)
+        console.log(newType);
+
+        axios.post('http://localhost:4000/trainingtype/add', newType)
             .then(res => console.log(res.data))
             .then(data => {
-                alert('Trainer added sccesfully');
+                alert('Type added sccessfully');
                 window.location.reload();
             })
             .catch(function(error){
@@ -56,18 +55,18 @@ export default class Trainer extends Component{
     }
 
     componentDidMount(){
-        axios.get('http://localhost:4000/trainers')
+        axios.get('http://localhost:4000/trainingTypes')
             .then(response => {
-                this.setState({trainers: response.data});
+                this.setState({types: response.data});
             })
             .catch(function(error){
                 console.log(error);
             })
     }
 
-    trainers(){
-        return this.state.trainers.map(function(currentTrainer, i){
-            return <TrainerList trainer={currentTrainer} key={i} />;
+    types(){
+        return this.state.types.map(function(currentType, i){
+            return <TypesList type={currentType} key={i} />;
         })
     }    
 
@@ -78,18 +77,18 @@ export default class Trainer extends Component{
                 <div className="formcontainer">
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
-                        <label for="trainerId">ID</label>
-                        <input type="text" className="form-control" value = {this.state.trainerId} onChange={this.onChangeId} placeholder="Enter Trainer's Id"/>
+                        <label for="typeId">ID</label>
+                        <input type="text" required className="form-control" value = {this.state.trainingId} onChange={this.onChangeId} placeholder="Enter Type Id"/>
                     </div>
 
                     <div className="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" className="form-control" value = {this.state.trainerName} onChange={this.onChangeName} placeholder="Enter full name"/>
+                        <label for="trainingType">Type</label>
+                        <input type="text" required className="form-control" value = {this.state.trainingType} onChange={this.onChangeName} placeholder="Enter type name"/>
                     </div>
                     
                     <div className="form-group">
-                        <label for="Designation">Designation</label>
-                        <input type="text" className="form-control"value = {this.state.designation} onChange = {this.onChangeDesination} placeholder="Enter Designation"/>
+                        <label for="designation">Description</label>
+                        <input type="text" required className="form-control"value = {this.state.description} onChange = {this.onChangeDescription} placeholder="Enter Description"/>
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
@@ -101,15 +100,15 @@ export default class Trainer extends Component{
                     <table className="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Username </th>
-                                    <th>Name</th>
-                                    <th>Designation</th>
+                                    <th>ID </th>
+                                    <th>Type</th>
+                                    <th>Description</th>
                                     <th>Action</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.trainers()}
+                                {this.types()}
                             </tbody>
                         </table>
                 </div>

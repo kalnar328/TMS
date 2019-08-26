@@ -14,7 +14,6 @@ class TrainerList extends Component {
         axios.delete('http://localhost:4000/remove/'+this.props.trainer.trainerId)
             .then(res=>{
                 console.log('Deleted');
-                alert('User deleted!!!!');
                 window.location.reload();
             })
             .catch(err => console.log(err))
@@ -30,7 +29,9 @@ class TrainerList extends Component {
            <Link to={"trainer/edit/"+this.props.trainer.trainerId} className="btn btn-primary">Edit</Link>
          </td>
          <td>
-           <button onClick={this.delete} className="btn btn-danger">Delete</button>
+           <button className="btn btn-danger" onClick={() => {if(window.confirm('Remove user?')){this.delete()};}}>Remove</button>
+
+
          </td>
     </tr>
     );

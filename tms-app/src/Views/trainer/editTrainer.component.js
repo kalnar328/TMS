@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import '../css/trainer.css';
+import '../../css/trainer.css';
 
 import '@trendmicro/react-modal/dist/react-modal.css';
 import Modal from '@trendmicro/react-modal';
@@ -25,19 +25,19 @@ export default class EditTrainer extends Component{
         };
     }
 
-    componentDidMount() {
-        axios.get('http://localhost:4000/edit/'+this.props.match.params.id)
-            .then(response => {
-                this.setState({
-                    trainerId: response.data.trainerId,
-                    trainerName: response.data.trainerName,
-                    designation: response.data.designation
-                })   
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-    }
+    // componentDidMount() {
+    //     axios.get('http://localhost:4000/edit/'+this.props.match.params.id)
+    //         .then(response => {
+    //             this.setState({
+    //                 trainerId: response.data.trainerId,
+    //                 trainerName: response.data.trainerName,
+    //                 designation: response.data.designation
+    //             })   
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         })
+    // }
 
     onChangeId = (e) => {
         this.setState({
