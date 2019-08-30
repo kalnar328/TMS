@@ -115,17 +115,17 @@ export default class EditEvent extends Component{
                 <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                         <label for="eventId">Event</label>
-                        <input type="text" className="form-control" value = {this.state.eventId} onChange={this.onChangeId} placeholder="Enter Event Id"/>
+                        <input type="text" required maxlength ="5" className="form-control" value = {this.state.eventId} onChange={this.onChangeId} placeholder="Enter Event Id"/>
                     </div>
 
                     <div className="form-group">
                         <label for="startDate">Start Date</label>
-                        <input type="date" className="form-control" value = {this.state.startDate} onChange={this.onChangeSDate} placeholder="Enter start date"/>
+                        <input type="date" required className="form-control" value = {this.state.startDate} onChange={this.onChangeSDate} placeholder="Enter start date"/>
                     </div>
                     
                     <div className="form-group">
                         <label for="endDate">End Date</label>
-                        <input type="date" className="form-control"value = {this.state.endDate} onChange = {this.onChangEDate} placeholder="Enter end date"/>
+                        <input type="date" required className="form-control"value = {this.state.endDate} onChange = {this.onChangEDate} placeholder="Enter end date"/>
                     </div>
                     <div className="form-group">
                         <label for="trainer">Trainer</label>
@@ -133,7 +133,7 @@ export default class EditEvent extends Component{
                     </div>
                     <div className="form-group">
                         <label for="endDate">Training Type</label>
-                        <input type="text" className="form-control"value = {this.state.trainingId} onChange = {this.onChangeTrainingId} placeholder="Enter Training Type"/>
+                        <input type="text" required className="form-control"value = {this.state.trainingId} onChange = {this.onChangeTrainingId} placeholder="Enter Training Type"/>
                     </div>
                         <button type="submit" className="btn btn-primary">Update</button>  
                 </form>

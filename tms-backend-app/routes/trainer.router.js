@@ -13,6 +13,19 @@ module.exports = {
       });
   },
 
+  getNoOfTrainers: (req, res) => {
+    // query database to get all the trainers
+    let query = "SELECT COUNT(trainerId) as total FROM trainer"; 
+
+    // execute query
+    db.query(query, (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        return res.send(result);
+    });
+},
+
   getById: (req, res) => {
     id = req.params.id;
     // query database to get all the trainers
@@ -36,20 +49,25 @@ module.exports = {
            designation : req.body.designation
       }
 
+      let message = '';
+
       let query = "INSERT INTO trainer(trainerId, trainerName, designation) VALUES ('"+ Trainer.id +"', '"+Trainer.name+"', '"+ Trainer.designation+"')" ;
       let selectQuery = "SELECT * FROM trainer WHERE trainerId = '"+ Trainer.id +"' ";
 
       db.query(selectQuery, (err, result) => {
-          if(result.length)
-        console.log(result);
-      });
-
-      db.query(query, (err, result) => {
-          if(err){
-              return res.status(500).send(err);
+        /* check whether the trainer Id exists in the database */
+          if(result.length > 0){
+             message = 'ID exists';
+             return res.status(202).send({message: message});
+          }else{
+             db.query(query, (err, result) => {
+              if(err){
+                  return res.status(500).send(err);
+              }
+              return res.status(200).send({message: "successfully added"});
+          });
           }
-          return res.status(200).send({message: "successfully added"});
-      });
+      });  
   },
 
   editTrainer: (req, res) => {
@@ -74,9 +92,7 @@ module.exports = {
   removeTrainer: (req,res) => {
 
     id = req.params.id;
-   
-    // console.log(id);
-   
+
     let query = "DELETE FROM trainer WHERE trainerId = '"+ id +"' ";
 
     db.query(query, (err, result) => {

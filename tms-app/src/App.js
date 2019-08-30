@@ -12,7 +12,7 @@ function App() {
   return (
     <Router>
       <div className="container">
-        <h2>Header to be added</h2>
+        <h2>TMS</h2>
       </div>
       <NavBar/>
     </Router>

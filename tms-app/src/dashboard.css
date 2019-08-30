@@ -1,7 +1,22 @@
- .dashboard {
-    background-color:rgb(240, 232, 232); 
-    padding: 20px;
+.dashboard {
     width: 85vw;
-    position: static;
+    background-color: rgb(238, 238, 240);
+    padding:2% 3%;
+    height:95%;
+    float: right;
+    display: flex;
+    flex-direction: row;
     min-height: 100vh;
-}
+  }
+
+  .card1{
+    background-color:  white;
+    padding:4% 3% ;
+    height:30%;
+    width: 30%;
+    float: right;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  

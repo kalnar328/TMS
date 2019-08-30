@@ -46,13 +46,19 @@ export default class Trainer extends Component{
         };
 
         axios.post('http://localhost:4000/new', newTrainer)
-            .then(res => console.log(res.data))
-            .then(data => {
-                alert('Trainer added sccesfully');
-                window.location.reload();
+            .then(res => {
+                /* alert if the trainer ID is in the database */
+                if(res.status === 202){
+                    alert('ID exists. Please use a different Trainer ID');
+                }else{
+                    console.log(res.data);
+                    alert('Trainer added sccesfully');
+                    window.location.reload();
+                }
+                
             })
-            .catch(function(error){
-                console.log(error);
+            .catch(function(err){
+                console.log(err);
             });
     }
 
@@ -80,17 +86,17 @@ export default class Trainer extends Component{
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label for="trainerId">ID</label>
-                        <input type="text" required className="form-control" value = {this.state.trainerId} onChange={this.onChangeId} placeholder="Enter Trainer's Id"/>
+                        <input type="text" required maxlength="6" className="form-control" value = {this.state.trainerId} onChange={this.onChangeId} placeholder="Enter Trainer's Id"/>
                     </div>
 
                     <div className="form-group">
                         <label for="name">Full Name</label>
-                        <input type="text" required className="form-control" value = {this.state.trainerName} onChange={this.onChangeName} placeholder="Enter full name"/>
+                        <input type="text" required maxlength="20" className="form-control" value = {this.state.trainerName} onChange={this.onChangeName} placeholder="Enter full name"/>
                     </div>
                     
                     <div className="form-group">
                         <label for="Designation">Designation</label>
-                        <input type="text" required className="form-control"value = {this.state.designation} onChange = {this.onChangeDesination} placeholder="Enter Designation"/>
+                        <input type="text" required maxlength="25" className="form-control"value = {this.state.designation} onChange = {this.onChangeDesination} placeholder="Enter Designation"/>
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>

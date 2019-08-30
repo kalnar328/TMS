@@ -1,7 +1,7 @@
 module.exports = {
 
     getAllTypes: (req, res) => {
-        // query database to get all the type
+        // query database to get all the types
         let query = "SELECT * FROM trainingtype"; 
   
         // execute query
@@ -12,6 +12,19 @@ module.exports = {
             return res.send(result);
         });
     },
+
+    getAllTypeIds: (req, res) => {
+      // query database to get all the types
+      let query = "SELECT COUNT(trainingId) as total FROM trainingtype"; 
+
+      // execute query
+      db.query(query, (err, result) => {
+          if (err) {
+              return res.status(500).send(err);
+          }
+          return res.send(result);
+      });
+  },
   
     getTypeById: (req, res) => {
       id = req.params.id;
@@ -40,15 +53,17 @@ module.exports = {
         let selectQuery = "SELECT * FROM trainingtype WHERE trainingId = '"+ TrainingType.trainingId +"' ";
   
         db.query(selectQuery, (err, result) => {
-            if(result.length)
-          console.log(result);
-        });
-  
-        db.query(query, (err, result) => {
-            if(err){
-                return res.status(500).send(err);
+            if(result.length > 0){
+              message = 'ID exists';
+              return res.status(202).send({message: message});
+            }else{
+              db.query(query, (err, result) => {
+                if(err){
+                    return res.status(500).send(err);
+                }
+                return res.status(200).send({message: "successfully added"});
+            });
             }
-            return res.status(200).send({message: "successfully added"});
         });
     },
   

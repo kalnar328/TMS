@@ -17,7 +17,10 @@ export default class TrainingEvent extends Component{
             endDate: '',
             trainingId : '',
             trainerId : '',
-            events: []
+            events: [],
+            typeIds: [],
+            selectedType: '',
+            validation: ''
         };
         this.onSubmit = this.onSubmit.bind(this);
     }
@@ -58,15 +61,19 @@ export default class TrainingEvent extends Component{
             trainingId: this.state.trainingId,
             trainerId: this.state.trainerId
         };
-
+       
         if(newEvent.startDate > newEvent.endDate){
             alert('Enter a valid time period');
         }else{
             axios.post('http://localhost:4000/event/add', newEvent)
-            .then(res => console.log(res.data))
-            .then(data => {
-                alert('Event added sccesfully');
-                window.location.reload();
+            .then(res => {
+
+                if(res.status === 202){
+                    alert('Please use a different Event ID');
+                }else{
+                    alert('New Event added sccesfully');
+                    window.location.reload();
+                }
             })
             .catch(function(error){
                 console.log(error);
@@ -75,13 +82,23 @@ export default class TrainingEvent extends Component{
     }
 
     componentDidMount(){
-        axios.get('http://localhost:4000/events')
+            axios.get('http://localhost:4000/events')
             .then(response => {
                 this.setState({events: response.data});
             })
             .catch(function(error){
                 console.log(error);
             })
+
+            // axios.get('http://localhost:4000/trainingTypeIds')
+            // .then(data => {
+            //     this.setState({typeIds: data.data});
+            //     let teamsFromApi = data.map(team => { return {value: team, display: team} })
+            //     this.setState({ typeIds: [{value: '', display: '(Select your favourite team)'}].concat(teamsFromApi) });
+            // })
+            // .catch(function(error){
+            //     console.log(error);
+            // })
     }
 
     events(){
@@ -98,7 +115,7 @@ export default class TrainingEvent extends Component{
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label for="eventId">Event</label>
-                        <input type="text" required className="form-control" value = {this.state.eventId} onChange={this.onChangeEventId} placeholder="Enter Event Id"/>
+                        <input type="text" required maxlength ="5" className="form-control" value = {this.state.eventId} onChange={this.onChangeEventId} placeholder="Enter Event Id"/>
                     </div>
 
                     <div className="form-group">
@@ -114,10 +131,26 @@ export default class TrainingEvent extends Component{
                         <label for="trainer">Trainer</label>
                         <input type="text" className="form-control"value = {this.state.trainerId} onChange = {this.onChangeTrainer} placeholder="Enter Trainer's ID"/>
                     </div>
+
                     <div className="form-group">
-                        <label for="endDate">Training Type</label>
+                        <label for="type">Training Type</label>
                         <input type="text" required className="form-control"value = {this.state.trainingId} onChange = {this.onChangeTrainingId} placeholder="Enter Training Type"/>
                     </div>
+                    
+                     {/* <div className="form-group"> */}
+                        {/* <label for="trainingType">Training Type</label> */}
+                            {/* <select value = {this.state.selectedType} onChange={(e) => this.setState({selectedType: e.target.value})}>
+
+                                {this.state.typeIds.map((trainingId) => <option key={trainingId.value} value={trainingId.value}>{trainingId.display}</option>)}
+                                
+                            </select> */}
+
+                        {/* <div style={{color: 'red', marginTop: '5px'}}>
+                          {this.state.validationError}
+                        </div> */}
+
+                    {/* </div> */}
+
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
                 </div>
@@ -140,7 +173,7 @@ export default class TrainingEvent extends Component{
                             <tbody>
                                 {this.events()}
                             </tbody>
-                        </table>
+                    </table>
                 </div>
              </div>
         )

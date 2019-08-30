@@ -44,10 +44,13 @@ export default class TrainingType extends Component{
         console.log(newType);
 
         axios.post('http://localhost:4000/trainingtype/add', newType)
-            .then(res => console.log(res.data))
-            .then(data => {
-                alert('Type added sccessfully');
-                window.location.reload();
+            .then(res => {
+                if(res.status === 202){
+                    alert('ID exists. Please use a different ID');
+                }else{
+                    alert('Training Type added sccessfully');
+                    window.location.reload();
+                } 
             })
             .catch(function(error){
                 console.log(error);
@@ -78,17 +81,17 @@ export default class TrainingType extends Component{
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label for="typeId">ID</label>
-                        <input type="text" required className="form-control" value = {this.state.trainingId} onChange={this.onChangeId} placeholder="Enter Type Id"/>
+                        <input type="text" required maxlength="5" className="form-control" value = {this.state.trainingId} onChange={this.onChangeId} placeholder="Enter Type Id"/>
                     </div>
 
                     <div className="form-group">
                         <label for="trainingType">Type</label>
-                        <input type="text" required className="form-control" value = {this.state.trainingType} onChange={this.onChangeName} placeholder="Enter type name"/>
+                        <input type="text" required maxlength="40" className="form-control" value = {this.state.trainingType} onChange={this.onChangeName} placeholder="Enter type name"/>
                     </div>
                     
                     <div className="form-group">
                         <label for="designation">Description</label>
-                        <input type="text" required className="form-control"value = {this.state.description} onChange = {this.onChangeDescription} placeholder="Enter Description"/>
+                        <input type="text" required maxlength="100" className="form-control"value = {this.state.description} onChange = {this.onChangeDescription} placeholder="Enter Description"/>
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>

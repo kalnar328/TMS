@@ -19,24 +19,41 @@ class EventList extends Component {
             .catch(err => console.log(err))
     }
 
-  render() {
-    return (
-    <tr>
-         <td>{this.props.event.eventId}</td>
-         <td>{this.props.event.endDate}</td>
-         <td>{this.props.event.endDate}</td>
-         <td>{this.props.event.trainingId}</td>
-         <td>{this.props.event.trainerId}</td>
-         <td>
-           <Link to={"event/edit/"+this.props.event.eventId} className="btn btn-primary">Edit</Link>
-         </td>
-         <td>
-           <button className="btn btn-danger" onClick={() => {if(window.confirm('Remove event?')){this.delete()};}}>Remove</button>
-         </td>
-    </tr>
-    );
-  }
+    render() {
+      return (
+      <tr>
+           <td>{this.props.event.eventId}</td>
+           <td>{this.props.event.endDate}</td>
+           <td>{this.props.event.endDate}</td>
+           <td>{this.props.event.trainingId}</td>
+           <td>{this.props.event.trainerId}</td>
+           <td>
+             <Link to={"event/edit/"+this.props.event.eventId} className="btn btn-primary">Edit</Link>
+           </td>
+           <td>
+             <button className="btn btn-danger" onClick={() => {if(window.confirm('Remove event?')){this.delete()};}}>Remove</button>
+           </td>
+      </tr>
+      );
+    }
+
+  // render() {
+  //   return (
+  //   <tr>
+  //        <td>{this.props.event.eventId}</td>
+  //        <td>{this.props.event.endDate}</td>
+  //        <td>{this.props.event.endDate}</td>
+  //        <td>{this.props.event.trainingId}</td>
+  //        <td>{this.props.event.trainerId}</td>
+  //        <td>
+  //          <Link to={"event/edit/"+this.props.event.eventId} className="btn btn-primary">Edit</Link>
+  //        </td>
+  //        <td>
+  //          <button className="btn btn-danger" onClick={() => {if(window.confirm('Remove event?')){this.delete()};}}>Remove</button>
+  //        </td>
+  //   </tr>
+  //   );
+  // }
 }
 
 export default EventList;
-

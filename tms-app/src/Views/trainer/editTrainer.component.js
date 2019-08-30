@@ -98,17 +98,17 @@ export default class EditTrainer extends Component{
                 <form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <label for="trainerId">ID</label>
-                            <input type="text" className="form-control" value = {this.state.trainerId} onChange={this.onChangeId} placeholder="Enter Trainer's Id"/>
+                            <input type="text" maxlength="6" required className="form-control" value = {this.state.trainerId} onChange={this.onChangeId} placeholder="Enter Trainer's Id"/>
                         </div>
 
                         <div className="form-group">
                             <label for="name">Full Name</label>
-                            <input type="text" className="form-control" value = {this.state.trainerName} onChange={this.onChangeName} placeholder="Enter full name"/>
+                            <input type="text" maxlength="20" required className="form-control" value = {this.state.trainerName} onChange={this.onChangeName} placeholder="Enter full name"/>
                         </div>
                         
                         <div className="form-group">
                             <label for="Designation">Designation</label>
-                            <input type="text" className="form-control"value = {this.state.designation} onChange = {this.onChangeDesination} placeholder="Enter Designation"/>
+                            <input type="text" maxlength="25" required className="form-control"value = {this.state.designation} onChange = {this.onChangeDesination} placeholder="Enter Designation"/>
                         </div>
                         <button type="submit" className="btn btn-primary">Update</button>
                         
