@@ -1,3 +1,5 @@
 # TMS
 
-*Training Management System*
+**Training Management System**
+
+Manage training events, instructors and events
